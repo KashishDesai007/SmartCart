@@ -4,7 +4,6 @@ import { commonColors } from "../../../assests/colors/colors";
 import "./productDetail.css";
 import texts from "../../../assests/commonTexts/commonTexts.json"
 export default function ProductDetail (props) {
-    console.log("image-->", props?.selectedProduct?.image?.length);
     return(
         <Modal
         open={props?.open}

@@ -9,7 +9,7 @@ export const productsSlice = createSlice({
     },
     reducers:{
         fetchProducts:(state, action) => {
-            state.products.push(...action.payload)
+            state.products = action.payload
         },
         addProduct:(state, action) => {
             console.log("action---", action.payload)

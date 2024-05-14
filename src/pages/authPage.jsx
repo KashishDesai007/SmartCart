@@ -42,7 +42,7 @@ const insertDataInIndexedDb = () => {
     console.log("This browser doesn't support IndexedDB");
     return;
   }
-
+  console.log("hello--->", idb)
   const request = idb.open("smartCart", 1);
 
   request.onerror = function (event) {
@@ -73,7 +73,6 @@ const insertDataInIndexedDb = () => {
                     dispatch(fetchUsers(query.srcElement.result))
                  setCreateUser(true)
                 } else {
-                // setUsersData(query.srcElement.result);
                dispatch(fetchUsers(query.srcElement.result))
                     setCreateUser(false)
                 }
@@ -112,7 +111,6 @@ const insertDataInIndexedDb = () => {
                     setCreateUser(false)
                     db.close()
                 }
-                alert("userAdded")
             }
             users.onerror = () => {
                 console.log("error----")

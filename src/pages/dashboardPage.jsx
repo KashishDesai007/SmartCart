@@ -231,7 +231,7 @@ export default function DashboardPage () {
   }
 
   const activeProducts = () => {
-    const active = tableData.filter((item) => item?.status === true)
+    const active = tableData?.filter((item) => item?.status === true)
     return active.length
   }
 
@@ -246,11 +246,14 @@ export default function DashboardPage () {
     })
           
           useEffect(() => {
-            dispatch(fetchProducts(authData?.products))
-            setTableData(products)
             if (!cookies.get('user')){
               navigate("/login")
+              window.location.reload()
+            }else {
+              dispatch(fetchProducts(authData?.products))
+              setTableData(products)  
             }
+
           }, [tableData.length])
 
     return(
@@ -259,7 +262,7 @@ export default function DashboardPage () {
         <div className="p-[3%] w-full !h-full !bg-aquariumBlue flex flex-col gap-2">
         <DashbordHead authData={authData} handleAddProduct={handleAddProduct} totalProducts={tableData.length > 0 ? tableData.length : texts.commonTexts.noProducts}  activeProducts={activeProducts() > 0 ? activeProducts() :  texts.commonTexts.noProducts}/>
         <div className=" max-[1000px]:overflow-x-scroll max-[1000px]:no-scrollbar">
-            <Table onRow={( items, index) => { return { onClick:()=> handleDetails(items?.id)}}} columns={columns} dataSource={tableData} pagination={{ pageSize: 3}}/>
+            <Table onRow={( items, index) => { return { onClick:()=> items?.status === true? handleDetails(items?.id): null}}} columns={columns} dataSource={tableData} pagination={{ pageSize: 3}}/>
         </div>
         </div>
         <ProductsForm
